@@ -15,7 +15,7 @@ public class BaseTest {
     @BeforeSuite(alwaysRun = true)
     public void loadConfig() {
         String env = System.getProperty("env");
-        env = (env == null || env.isEmpty()) ? "staging" : env;
+        env = (env == null || env.isEmpty()) ? "production" : env;
         config = ConfigReader.loadProperties(env);
     }
 
@@ -24,7 +24,7 @@ public class BaseTest {
     public void setUp(@Optional("chrome") String browser) {
         DriverManager.initDriver(browser);
         DriverManager.getDriver().manage().window().maximize();
-        DriverManager.getDriver().get(config.getProperty("baseUrl"));
+                DriverManager.getDriver().get(config.getProperty("baseUrl"));
     }
 
     @AfterMethod(alwaysRun = true)

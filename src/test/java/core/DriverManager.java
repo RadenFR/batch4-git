@@ -1,18 +1,14 @@
 package core;
 
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-
 public class DriverManager {
 
-
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-
 
     public static void initDriver(String browser) {
         WebDriver webDriver = null;
@@ -21,10 +17,8 @@ public class DriverManager {
                 String githubActions = System.getenv("GITHUB_ACTIONS");
                 boolean isCI = githubActions != null && githubActions.equals("true");
 
-
                 System.out.println("=== Driver Initialization ===");
                 System.out.println("Running in CI: " + isCI);
-
 
                 if (!isCI) {
                     System.out.println("Setting up ChromeDriver via WebDriverManager");
@@ -38,9 +32,7 @@ public class DriverManager {
                     }
                 }
 
-
                 ChromeOptions options = new ChromeOptions();
-
 
                 options.addArguments("--disable-blink-features=AutomationControlled");
                 options.addArguments("--disable-web-resources");
@@ -49,7 +41,6 @@ public class DriverManager {
                 options.addArguments("--disable-component-extensions-with-background-pages");
                 options.setExperimentalOption("useAutomationExtension", false);
                 options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-
 
                 if (isCI) {
                     System.out.println("Configuring Chrome for CI environment");
@@ -60,7 +51,6 @@ public class DriverManager {
                     } else {
                         System.out.println("CHROME_BIN not set, using default");
                     }
-
 
                     options.addArguments("--headless=new");
                     options.addArguments("--disable-gpu");
@@ -75,7 +65,6 @@ public class DriverManager {
                 } else {
                     options.addArguments("--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
                 }
-
 
                 try {
                     System.out.println("Creating ChromeDriver instance...");
@@ -110,4 +99,6 @@ public class DriverManager {
 
 
 }
+
+
 

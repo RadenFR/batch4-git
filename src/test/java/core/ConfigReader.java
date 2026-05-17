@@ -8,7 +8,7 @@ public class ConfigReader {
 
     public static Properties loadProperties(String env) {
         Properties prop = new Properties();
-        if (env == null || env.isEmpty()) env = "staging";
+        if (env == null || env.isEmpty()) env = "production";
 
         String path = System.getProperty("user.dir") + "/src/test/resources/config/" + env + ".properties";
 
